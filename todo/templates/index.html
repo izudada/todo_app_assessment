@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block body %}
+    <h1>All Todos</h1>
+    <div class="">
+ 
+        {% if context %}
+            {% for todo in context %}
+                <a href=>
+                    <div class="item">
+                        <h5>{{ todo.title }}</h5>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p> No todo record available </p>
+        {% endif %}
+
+    </div>    
+
+
+
+{% endblock %}
