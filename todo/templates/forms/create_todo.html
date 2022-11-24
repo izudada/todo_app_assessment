@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}"> <small> Home </small></a></li>
+            <li class="breadcrumb-item"><small> Create Todo </small></li>
+        </ol>
+    </nav>
+
+    <h3>Create a todo </h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <p><input type="submit" value="Create" class="btn btn-success"></p>
+    </form>
+{% endblock %}

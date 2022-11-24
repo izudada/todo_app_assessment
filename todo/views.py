@@ -1,16 +1,31 @@
 from django.shortcuts import render
-
+from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, DeleteView, 
                                     DetailView, ListView,UpdateView)
 from .models import Todo
+from .forms import TodoForm
 
 
 class Index(ListView):
+
+    """
+        A view for viewing all todos
+    """
+
     model = Todo
     template_name = 'index.html'
     fields = []
 
-    def get_context_data(self):
-        
-        context = self.model.objects.all()
-        return {'context': context}
+
+class CreateTodoView(CreateView):
+    """
+        A view for creating a todo
+    """
+
+    model = Todo
+    success_url = reverse_lazy('index')
+    form_class = TodoForm
+    template_name = 'forms/create_todo.html'
+
+    def form_valid(self, form):
+        return super(CreateTodoView, self).form_valid(form)
