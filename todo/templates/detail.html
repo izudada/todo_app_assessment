@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}"> <small> Home </small></a></li>
+            <li class="breadcrumb-item"><small> {{ todo }} </small></li>
+        </ol>
+    </nav>
+
+    <div class="todo">
+
+        <div class="item">
+            <h3>{{ todo.title }}</h3>
+
+            <p> {{ todo.body }} </p>
+        </div>
+
+        
+
+    </div>    
+{% endblock %}

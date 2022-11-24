@@ -8,7 +8,7 @@
             {% for todo in object_list %}
                 <a href=>
                     <div class="item">
-                        <h5>{{ todo.title }}</h5>
+                        <h5> <a href="{% url 'detail' todo.id %}">{{ todo.title }} </a></h5>
                     </div>
                 </a>
             {% endfor %}

@@ -29,3 +29,16 @@ class CreateTodoView(CreateView):
 
     def form_valid(self, form):
         return super(CreateTodoView, self).form_valid(form)
+
+
+class TodoView(DetailView):
+    """
+        A view for creating a todo
+    """
+
+    model = Todo
+    template_name = 'detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
