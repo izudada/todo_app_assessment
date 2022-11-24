@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
                         Index, CreateTodoView,
                         TodoView, EditTodo,
-                        DeleteTodo
+                        DeleteTodo, CompleteTodo
                     )
 
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path('create/<int:pk>/', TodoView.as_view(), name="detail"),
     path('<int:pk>/edit/', EditTodo.as_view(), name="edit"),
     path('<int:pk>/delete/', DeleteTodo.as_view(), name="delete"),
+    path('<int:pk>/completed/', CompleteTodo.as_view(), name="complete"),
 ]

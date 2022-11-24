@@ -31,3 +31,13 @@ main{
     width: 50%;
     margin-bottom: 50px;
 }
+
+.list{
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}

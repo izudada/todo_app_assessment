@@ -62,3 +62,22 @@ class DeleteTodo(DeleteView):
     fields = []
     success_url = reverse_lazy('index')
 
+
+class CompleteTodo(UpdateView):
+    """
+        A view for deleting a todo
+    """
+    model = Todo
+    fields = ["completed"]
+
+    def form_valid(self, form):
+        is_ajax = self.request.headers.get("x-requested-with") == "XMLHttpRequest"
+        if is_ajax:
+            todo_id = self.request.POST.get("todo")
+            todo = Todo.objects.get(pk=todo_id)
+            if todo.completed == False:
+                form.instance.completed = True
+            else:
+                form.instance.completed = False
+        return super(CompleteTodo, self).form_valid(form)
+    
