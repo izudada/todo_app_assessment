@@ -65,7 +65,7 @@ class DeleteTodo(DeleteView):
 
 class CompleteTodo(UpdateView):
     """
-        A view for deleting a todo
+        A view for setting completed value of a todo
     """
     model = Todo
     fields = ["completed"]
