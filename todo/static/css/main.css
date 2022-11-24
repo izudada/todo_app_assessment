@@ -1,3 +1,14 @@
 main{
     margin-top: 40px;
 }
+
+.actions {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.actions a {
+    font-weight: bold;
+}

@@ -42,3 +42,9 @@ class TodoView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+class EditTodo(UpdateView):
+    model = Todo
+    template_name = 'forms/edit.html'
+    fields = ['title', 'body']
