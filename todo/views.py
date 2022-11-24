@@ -45,6 +45,20 @@ class TodoView(DetailView):
 
 
 class EditTodo(UpdateView):
+    """
+        A view for updating a todo
+    """
     model = Todo
     template_name = 'forms/edit.html'
     fields = ['title', 'body']
+
+
+class DeleteTodo(DeleteView):
+    """
+        A view for deleting a todo
+    """
+    model = Todo
+    template_name = 'forms/delete.html'
+    fields = []
+    success_url = reverse_lazy('index')
+

@@ -1,5 +1,17 @@
+a {
+    text-decoration: none !important;
+}
+
 main{
     margin-top: 40px;
+}
+
+.nav {
+    margin-top: 10px;
+}
+
+.item {
+    margin-bottom: 20px;
 }
 
 .actions {
@@ -11,4 +23,11 @@ main{
 
 .actions a {
     font-weight: bold;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-bottom: 50px;
 }

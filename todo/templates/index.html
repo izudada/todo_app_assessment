@@ -6,11 +6,12 @@
 
         {% if object_list %}
             {% for todo in object_list %}
-                <a href=>
-                    <div class="item">
-                        <h5> <a href="{% url 'detail' todo.id %}">{{ todo.title }} </a></h5>
-                    </div>
-                </a>
+                <ul class="item">
+                    <li> 
+                        <a href="{% url 'detail' todo.id %}">{{ todo.title }} </a>
+                        <input type="checkbox" id="{{ todo.id }}">
+                    </li>
+                </ul>
             {% endfor %}
         {% else %}
             <p> No todo record available </p>

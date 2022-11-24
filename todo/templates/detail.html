@@ -12,13 +12,26 @@
 
         <div class="item">
             <h3>{{ todo.title }}</h3>
+            <div class="date">
+                <p>
+                    <small> <strong>Created</strong>: {{ todo.created_at }}</small>
+                </p>
+                <p>
+                    <small>                
+                        {% if todo.edited_at %}
+                            <strong>Edited</strong>: {{ todo.edited_at }}
+                        {% endif %}
+                    </small>
+                </p>
+            </div>
+
 
             <p> {{ todo.body }} </p>
         </div>
 
         <div class="actions">
             <a href="{% url 'edit' todo.id %}" class="btn btn-warning"> Edit </a>
-            <a href="" class="btn btn-danger"> Delete </a>
+            <a href="{% url 'delete' todo.id %}" class="btn btn-danger"> Delete </a>
         </div>
 
     </div>    
