@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     'todo',
     'crispy_forms',
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -146,9 +146,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'todo/static')
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
