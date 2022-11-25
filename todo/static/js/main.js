@@ -29,7 +29,7 @@ let completedTodo = () => {
                 $(".item").append(`
                     <li>
                         <a href="{% url 'detail' ${response.data[i].id} %}">${response.data[i].title}</a>
-                        <input type="checkbox" id="${response.data[i].id}" class="my-check" checked>
+                        <input type="checkbox" id="${response.data[i].id}" class="my-check" onclick='checkBox(this);' checked>
                     </li>
                 `);
             } 
@@ -76,25 +76,34 @@ let pendingTodo = () => {
     });
 }
 
+let checkBox = (input) =>{
+    var inputID = 0;
+
+    // Check if checkbos is DOM Element or NodeElement
+    if(input instanceof HTMLElement){
+        inputID = input.id
+    }else {
+        inputID = input.target.id;
+    }
+
+    $.ajax({
+        url: `${inputID}/completed/`,
+        type: 'post',
+        data: {
+            'todo': inputID,
+        },
+        headers: csrfHeaders(),
+        success: function (response) {
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    });
+}
+
 $(document).ready(function () {
     // click event on the todo checkbox
-    $('.my-check').click(function (input) {
-        var inputID = input.target.id;
-
-        $.ajax({
-            url: `${inputID}/completed/`,
-            type: 'post',
-            data: {
-                'todo': inputID,
-            },
-            headers: csrfHeaders(),
-            success: function (response) {
-            },
-            error: function(error) {
-                console.log(error)
-            }
-        });
-    });
+    $('.my-check').click(checkBox);
 
 
     $('.search').click(function (anchor) {
