@@ -29,6 +29,46 @@ let completedTodo = () => {
                     </li>
                 `);
             } 
+            // Change h1 tezt
+            $("h1").text("Completed Todos");
+
+            // Append items to new ul
+            $("h1").after(`<ul class="item"> ${listItem} </ul>`)
+        },
+        error: function(error) {
+            console.log(error)
+        }
+    });
+}
+
+let pendingTodo = () => {
+    $.ajax({
+        url: `search/`,
+        type: 'post',
+        data: {
+            'todo': 'pending',
+        },
+        headers: csrfHeaders(),
+        success: function (response) {
+            // Remove the ul
+            $( ".item" ).remove();
+
+            // create array for respose data for peding todos
+            var listItem = [];
+
+            // loop todos to make a list item
+            for(let i=0; i < response.data.length; i++) {
+                listItem.push(`
+                    <li>
+                        <a href="{% url 'detail' ${response.data[i].id} %}">${response.data[i].title}</a>
+                        <input type="checkbox" id="${response.data[i].id}" class="my-check">
+                    </li>
+                `);
+            } 
+
+            // Change h1 tezt
+            $("h1").text("Pending Todos");
+
 
             // Append items to new ul
             $("h1").after(`<ul class="item"> ${listItem} </ul>`)
@@ -70,7 +110,7 @@ $(document).ready(function () {
               completedTodo();
               break;
             case "Pending":
-              // code block
+              pendingTodo();
               break;
             default:
               window.location.reload();

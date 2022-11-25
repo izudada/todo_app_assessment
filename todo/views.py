@@ -21,6 +21,7 @@ def serializer(model_data):
 
     for todo in model_data:
         data = {}
+        data['id'] = todo.id
         data['title'] = todo.title
         data['body'] = todo.body
         data['completed'] = todo.completed
@@ -107,8 +108,17 @@ class CompleteTodo(UpdateView):
 
 
 def search(request):
-    if is_ajax(request) and request.POST.get("todo") == 'completed':
-        result = Todo.objects.filter(completed=True).order_by('-created_at')
+    """
+        A function to return todo search result
+    """
+
+    result = []
+    if is_ajax(request):
+        if request.POST.get("todo") == 'completed':
+            result = Todo.objects.filter(completed=True).order_by('-created_at')
+        elif request.POST.get("todo") == 'pending':
+            result = Todo.objects.filter(completed=False).order_by('-created_at')
+        
         return JsonResponse({
             'data' : serializer(result)
         })
