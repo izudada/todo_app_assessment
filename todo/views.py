@@ -1,9 +1,33 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import (CreateView, DeleteView, 
-                                    DetailView, ListView,UpdateView)
+from django.views.generic import (
+                                    CreateView, DeleteView, 
+                                    DetailView, ListView,
+                                    UpdateView
+                                )
+from django.http import JsonResponse
 from .models import Todo
 from .forms import TodoForm
+import json
+
+
+def is_ajax(request):
+    return request.headers.get("x-requested-with") == "XMLHttpRequest"
+
+
+def serializer(model_data):
+    
+    info = []
+
+    for todo in model_data:
+        data = {}
+        data['title'] = todo.title
+        data['body'] = todo.body
+        data['completed'] = todo.completed
+        data['created_at'] = todo.created_at
+        data['edited_at'] = todo.edited_at
+        info.append(data)
+    return info
 
 
 class Index(ListView):
@@ -15,6 +39,7 @@ class Index(ListView):
     model = Todo
     template_name = 'index.html'
     fields = []
+    ordering = ['-created_at']
 
 
 class CreateTodoView(CreateView):
@@ -71,8 +96,7 @@ class CompleteTodo(UpdateView):
     fields = ["completed"]
 
     def form_valid(self, form):
-        is_ajax = self.request.headers.get("x-requested-with") == "XMLHttpRequest"
-        if is_ajax:
+        if is_ajax(self.request):
             todo_id = self.request.POST.get("todo")
             todo = Todo.objects.get(pk=todo_id)
             if todo.completed == False:
@@ -80,4 +104,11 @@ class CompleteTodo(UpdateView):
             else:
                 form.instance.completed = False
         return super(CompleteTodo, self).form_valid(form)
-    
+
+
+def search(request):
+    if is_ajax(request) and request.POST.get("todo") == 'completed':
+        result = Todo.objects.filter(completed=True).order_by('-created_at')
+        return JsonResponse({
+            'data' : serializer(result)
+        })

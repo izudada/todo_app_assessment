@@ -17,6 +17,12 @@
             <li role="presentation" class="active"><a href="{% url 'index' %}">Home</a></li>
             <li role="presentation"><a href="{% url 'create' %}">Create Todo</a></li>
         </ul>
+
+        <ul class="nav nav-pills" id="search">
+            <li role="presentation" class="active"><a href="{% url 'index' %}" class="search">All</a></li>
+            <li role="presentation"><a href="" class="search">Pending</a></li>
+            <li role="presentation"><a href="" class="search">Completed</a></li>
+        </ul>
     </nav>
 
     <main class="container">
