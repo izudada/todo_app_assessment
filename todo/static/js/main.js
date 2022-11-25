@@ -65,7 +65,7 @@ let pendingTodo = () => {
                 $(".item").append(`
                     <li>
                         <a href="{% url 'detail' ${response.data[i].id} %}">${response.data[i].title}</a>
-                        <input type="checkbox" id="${response.data[i].id}" class="my-check">
+                        <input type="checkbox" id="${response.data[i].id}" class="my-check" onclick='checkBox(this);'>
                     </li>
                 `);
             } 
@@ -81,7 +81,7 @@ let checkBox = (input) =>{
 
     // Check if checkbos is DOM Element or NodeElement
     if(input instanceof HTMLElement){
-        inputID = input.id
+        inputID = input.id;
     }else {
         inputID = input.target.id;
     }
