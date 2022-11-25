@@ -17,23 +17,22 @@ let completedTodo = () => {
             // Remove the ul
             $( ".item" ).remove();
 
-            // create array for respose data for completed todos
-            var listItem = [];
+            // Change h1 tezt
+            $("h1").text("Completed Todos");
 
+            // Append items to new ul
+            $("h1").after(`<ul class="item"></ul>`)
+
+                        
             // loop todos to make a list item
             for(let i=0; i < response.data.length; i++) {
-                listItem.push(`
+                $(".item").append(`
                     <li>
                         <a href="{% url 'detail' ${response.data[i].id} %}">${response.data[i].title}</a>
                         <input type="checkbox" id="${response.data[i].id}" class="my-check" checked>
                     </li>
                 `);
             } 
-            // Change h1 tezt
-            $("h1").text("Completed Todos");
-
-            // Append items to new ul
-            $("h1").after(`<ul class="item"> ${listItem} </ul>`)
         },
         error: function(error) {
             console.log(error)
@@ -53,25 +52,23 @@ let pendingTodo = () => {
             // Remove the ul
             $( ".item" ).remove();
 
-            // create array for respose data for peding todos
-            var listItem = [];
+            // Change h1 tezt
+            $("h1").text("Pending Todos");
+
+
+            // Append items to new ul
+            $("h1").after(`<ul class="item">  </ul>`)
+
 
             // loop todos to make a list item
             for(let i=0; i < response.data.length; i++) {
-                listItem.push(`
+                $(".item").append(`
                     <li>
                         <a href="{% url 'detail' ${response.data[i].id} %}">${response.data[i].title}</a>
                         <input type="checkbox" id="${response.data[i].id}" class="my-check">
                     </li>
                 `);
             } 
-
-            // Change h1 tezt
-            $("h1").text("Pending Todos");
-
-
-            // Append items to new ul
-            $("h1").after(`<ul class="item"> ${listItem} </ul>`)
         },
         error: function(error) {
             console.log(error)

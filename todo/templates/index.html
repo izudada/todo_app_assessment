@@ -5,8 +5,8 @@
         <h1>All Todo</h1>
 
         {% if object_list %}
-            {% for todo in object_list %}
-                <ul class="item">
+            <ul class="item">
+                {% for todo in object_list %}
                     <li class="list"> 
                         <a href="{% url 'detail' todo.id %}">{{ todo.title }} </a>
                         {% if todo.completed == True  %}
@@ -15,8 +15,8 @@
                             <input type="checkbox" id="{{ todo.id }}" class="my-check">
                         {%endif%}
                     </li>
-                </ul>
-            {% endfor %}
+                {% endfor %}
+            </ul>
         {% else %}
             <p> No todo record available </p>
         {% endif %}
